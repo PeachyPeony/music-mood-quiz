@@ -110,3 +110,19 @@ select:focus {
   outline: 2px solid #d96c5f;
   outline-offset: 2px;
 }
+
+form button {
+  display: block;
+  margin: 35px auto 0;
+  padding: 15px 25px;
+  border: none;
+  background: #d96c5f;
+  color: #fffcf4;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+form button:hover {
+  background: #c85d51;
+}
