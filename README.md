@@ -14,4 +14,9 @@ The quiz includes:
 - React
 - Vite
 - JavaScript
+- HTML
 - CSS
+
+## Live demo
+
+[What's Your Music Mood?] (https://music-mood-quiz.pages.dev/)
