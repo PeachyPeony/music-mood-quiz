@@ -124,6 +124,7 @@ function App() {
                     value="chill"
                     checked={saturday === 'chill'}
                     onChange={(event) => setSaturday(event.target.value)}
+                    required
                   />
                   ☕ A slow morning with coffee
                 </label>
@@ -167,6 +168,7 @@ function App() {
               <select
                 value={location}
                 onChange={(event) => setLocation(event.target.value)}
+                required
               >
                 <option value="" disabled>
                   Select an option
@@ -191,6 +193,7 @@ function App() {
                     value="dreamy"
                     checked={atmosphere === 'dreamy'}
                     onChange={(event) => setAtmosphere(event.target.value)}
+                    required
                   />
                   ✨ Soft and magical
                 </label>
@@ -238,6 +241,7 @@ function App() {
               <select
                 value={playlist}
                 onChange={(event) => setPlaylist(event.target.value)}
+                required
               >
                 <option value="" disabled>
                   Select an option
@@ -261,6 +265,7 @@ function App() {
                     value="moody"
                     checked={evening === 'moody'}
                     onChange={(event) => setEvening(event.target.value)}
+                    required
                   />
                   🌃 Walking through a city at night
                 </label>
@@ -308,6 +313,7 @@ function App() {
               <select
                 value={sadSongs}
                 onChange={(event) => setSadSongs(event.target.value)}
+                required
               >
                 <option value="" disabled>
                   Select an option
@@ -332,6 +338,7 @@ function App() {
                     value="moody"
                     checked={listening === 'moody'}
                     onChange={(event) => setListening(event.target.value)}
+                    required
                   />
                   🎧 Headphones on, world off
                 </label>
@@ -381,6 +388,7 @@ function App() {
               <select
                 value={playlistTitle}
                 onChange={(event) => setPlaylistTitle(event.target.value)}
+                required
               >
                 <option value="" disabled>
                   Select an option
