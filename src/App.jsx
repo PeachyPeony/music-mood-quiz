@@ -10,7 +10,7 @@ function App() {
   const [sadSongs, setSadSongs] = useState('')
   const [listening, setListening] = useState('')
   const [playlistTitle, setPlaylistTitle] = useState('')
-  const [submitted, setSubmitted] = useState('')
+  const [submitted, setSubmitted] = useState(false)
   const handleSubmit = (event) => {
     event.preventDefault()
     setSubmitted(true)
@@ -21,26 +21,51 @@ function App() {
       icon: '☀️',
       name: 'Feel-Good',
       description: 'Bright, cheerful and always ready for a good time.',
+      soundtrack: [
+        '☀️ sunny drives',
+        '🎤 songs to sing along to',
+        '✨ instant mood boosters',
+      ],
     },
     dreamy: {
       icon: '🌙',
       name: 'Dreamy',
       description: 'Soft, atmospheric and a little magical.',
+      soundtrack: [
+        '✨ dreamy playlists',
+        '🌧️ rainy afternoons',
+        '🌙 late-night listening',
+      ],
     },
     chill: {
       icon: '🌿',
       name: 'Chill',
       description: 'Relaxed, cozy and perfectly happy taking it slow.',
+      soundtrack: [
+        '🌿 slow mornings',
+        '☕ cozy evenings',
+        '🎧 music in the background',
+      ],
     },
     party: {
       icon: '🪩',
       name: 'Party',
       description: 'Energetic, social and always ready to turn it up.',
+      soundtrack: [
+        '🪩 nights out with friends',
+        '💃 songs you can dance to',
+        '🔥 high-energy playlists',
+      ],
     },
     moody: {
       icon: '🖤',
       name: 'Moody',
       description: 'Emotional, introspective and a little mysterious.',
+      soundtrack: [
+        '🖤 late-night headphones',
+        '🌃 city lights after dark',
+        '💭 songs that hit a little deeper',
+      ],
     },
   }
 
@@ -84,6 +109,7 @@ function App() {
 
     return topMoods[0]
   }
+  const result = getResult()
   return (
     <>
       <header>
@@ -96,16 +122,16 @@ function App() {
         {submitted ? (
           <section className="result-card">
             <p className="result-label">YOUR MUSIC MOOD</p>
-            <div className="result-icon">{moodResults[getResult()].icon}</div>
-            <h2 className="result-name">{moodResults[getResult()].name}</h2>
-            <p className="result-description">{moodResults[getResult()].description}</p>
+            <div className="result-icon">{moodResults[result].icon}</div>
+            <h2 className="result-name">{moodResults[result].name}</h2>
+            <p className="result-description">{moodResults[result].description}</p>
 
             <div className="soundtrack">
               <p className="soundtrack-title">Your soundtrack</p>
               <ul>
-                <li>✨ dreamy playlists</li>
-                <li>🌧️ rainy afternoons</li>
-                <li>🌙 late-night listening</li>
+                {moodResults[result].soundtrack.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
               </ul>
             </div>
           </section>
