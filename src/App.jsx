@@ -70,6 +70,7 @@ function App() {
   }
 
   const getResult = () => {
+    // Give each music mood a score based on the user's answers.
     const scores = {
       'feel-good': 0,
       dreamy: 0,
@@ -103,6 +104,7 @@ function App() {
     if (topMoods.length === 1) {
       return topMoods[0]
     }
+    // Use the final playlist title question to break a tie.
     if (topMoods.includes(playlistTitle)) {
       return playlistTitle
     }
