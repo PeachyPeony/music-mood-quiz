@@ -72,9 +72,17 @@ function App() {
 
     const highestScore = Math.max(...Object.values(scores))
 
-    return Object.keys(scores).find(
+    const topMoods = Object.keys(scores).filter(
       (mood) => scores[mood] === highestScore
     )
+    if (topMoods.length === 1) {
+      return topMoods[0]
+    }
+    if (topMoods.includes(playlistTitle)) {
+      return playlistTitle
+    }
+
+    return topMoods[0]
   }
   return (
     <>
@@ -86,9 +94,20 @@ function App() {
 
       <main>
         {submitted ? (
-          <section>
-            <h2>Your Music Mood</h2>
-            <p>{getResult()}</p>
+          <section className="result-card">
+            <p className="result-label">YOUR MUSIC MOOD</p>
+            <div className="result-icon">{moodResults[getResult()].icon}</div>
+            <h2 className="result-name">{moodResults[getResult()].name}</h2>
+            <p className="result-description">{moodResults[getResult()].description}</p>
+
+            <div className="soundtrack">
+              <p className="soundtrack-title">Your soundtrack</p>
+              <ul>
+                <li>✨ dreamy playlists</li>
+                <li>🌧️ rainy afternoons</li>
+                <li>🌙 late-night listening</li>
+              </ul>
+            </div>
           </section>
         ) : (
           <form onSubmit={handleSubmit}>
