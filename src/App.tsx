@@ -1,22 +1,33 @@
 import { useState } from 'react'
+import type React from 'react'
 import './Quiz.css'
 
+type Mood = 'feel-good' | 'dreamy' | 'chill' | 'party' | 'moody'
+
 function App() {
-  const [saturday, setSaturday] = useState('')
-  const [location, setLocation] = useState('')
-  const [atmosphere, setAtmosphere] = useState('')
-  const [playlist, setPlaylist] = useState('')
-  const [evening, setEvening] = useState('')
-  const [sadSongs, setSadSongs] = useState('')
-  const [listening, setListening] = useState('')
-  const [playlistTitle, setPlaylistTitle] = useState('')
+  const [saturday, setSaturday] = useState<Mood | ''>('')
+  const [location, setLocation] = useState<Mood | ''>('')
+  const [atmosphere, setAtmosphere] = useState<Mood | ''>('')
+  const [playlist, setPlaylist] = useState<Mood | ''>('')
+  const [evening, setEvening] = useState<Mood | ''>('')
+  const [sadSongs, setSadSongs] = useState<Mood | ''>('')
+  const [listening, setListening] = useState<Mood | ''>('')
+  const [playlistTitle, setPlaylistTitle] = useState<Mood | ''>('')
   const [submitted, setSubmitted] = useState(false)
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setSubmitted(true)
   }
 
-  const moodResults = {
+  const moodResults: Record<
+    Mood,
+    {
+      icon: string
+      name: string
+      description: string
+      soundtrack: string[]
+    }
+  > = {
     'feel-good': {
       icon: '☀️',
       name: 'Feel-Good',
@@ -69,9 +80,9 @@ function App() {
     },
   }
 
-  const getResult = () => {
+  const getResult = (): Mood => {
     // Give each music mood a score based on the user's answers.
-    const scores = {
+    const scores: Record<Mood, number> = {
       'feel-good': 0,
       dreamy: 0,
       chill: 0,
@@ -79,7 +90,7 @@ function App() {
       moody: 0,
     }
 
-    const answers = [
+    const answers: (Mood | '')[] = [
       saturday,
       location,
       atmosphere,
@@ -87,7 +98,7 @@ function App() {
       evening,
       sadSongs,
       listening,
-      playlistTitle
+      playlistTitle,
     ]
 
     answers.forEach((answer) => {
@@ -98,14 +109,14 @@ function App() {
 
     const highestScore = Math.max(...Object.values(scores))
 
-    const topMoods = Object.keys(scores).filter(
+    const topMoods = (Object.keys(scores) as Mood[]).filter(
       (mood) => scores[mood] === highestScore
     )
     if (topMoods.length === 1) {
       return topMoods[0]
     }
     // Use the final playlist title question to break a tie.
-    if (topMoods.includes(playlistTitle)) {
+    if (playlistTitle && topMoods.includes(playlistTitle)) {
       return playlistTitle
     }
 
@@ -151,7 +162,7 @@ function App() {
                     name="saturday"
                     value="chill"
                     checked={saturday === 'chill'}
-                    onChange={(event) => setSaturday(event.target.value)}
+                    onChange={(event) => setSaturday(event.target.value as Mood | '')}
                     required
                   />
                   ☕ A slow morning with coffee
@@ -162,7 +173,7 @@ function App() {
                     name="saturday"
                     value="feel-good"
                     checked={saturday === 'feel-good'}
-                    onChange={(event) => setSaturday(event.target.value)}
+                    onChange={(event) => setSaturday(event.target.value as Mood | '')}
                   />
                   🌿 A spontaneous adventure
                 </label>
@@ -172,7 +183,7 @@ function App() {
                     name="saturday"
                     value="party"
                     checked={saturday === 'party'}
-                    onChange={(event) => setSaturday(event.target.value)}
+                    onChange={(event) => setSaturday(event.target.value as Mood | '')}
                   />
                   🪩 A night out with friends
                 </label>
@@ -182,7 +193,7 @@ function App() {
                     name="saturday"
                     value="moody"
                     checked={saturday === 'moody'}
-                    onChange={(event) => setSaturday(event.target.value)}
+                    onChange={(event) => setSaturday(event.target.value as Mood | '')}
                   />
                   🎧 Staying in with music and my thoughts
                 </label>
@@ -195,7 +206,7 @@ function App() {
               </h2>
               <select
                 value={location}
-                onChange={(event) => setLocation(event.target.value)}
+                onChange={(event) => setLocation(event.target.value as Mood | '')}
                 required
               >
                 <option value="" disabled>
@@ -220,7 +231,7 @@ function App() {
                     name="atmosphere"
                     value="dreamy"
                     checked={atmosphere === 'dreamy'}
-                    onChange={(event) => setAtmosphere(event.target.value)}
+                    onChange={(event) => setAtmosphere(event.target.value as Mood | '')}
                     required
                   />
                   ✨ Soft and magical
@@ -232,7 +243,7 @@ function App() {
                     name="atmosphere"
                     value="feel-good"
                     checked={atmosphere === 'feel-good'}
-                    onChange={(event) => setAtmosphere(event.target.value)}
+                    onChange={(event) => setAtmosphere(event.target.value as Mood | '')}
                   />
                   ☀️ Bright and catchy
                 </label>
@@ -243,7 +254,7 @@ function App() {
                     name="atmosphere"
                     value="chill"
                     checked={atmosphere === 'chill'}
-                    onChange={(event) => setAtmosphere(event.target.value)}
+                    onChange={(event) => setAtmosphere(event.target.value as Mood | '')}
                   />
                   🌿 Calm and mellow
                 </label>
@@ -254,7 +265,7 @@ function App() {
                     name="atmosphere"
                     value="party"
                     checked={atmosphere === 'party'}
-                    onChange={(event) => setAtmosphere(event.target.value)}
+                    onChange={(event) => setAtmosphere(event.target.value as Mood | '')}
                   />
                   🔥 Energetic and exciting
                 </label>
@@ -268,7 +279,7 @@ function App() {
 
               <select
                 value={playlist}
-                onChange={(event) => setPlaylist(event.target.value)}
+                onChange={(event) => setPlaylist(event.target.value as Mood | '')}
                 required
               >
                 <option value="" disabled>
@@ -292,7 +303,7 @@ function App() {
                     name="evening"
                     value="moody"
                     checked={evening === 'moody'}
-                    onChange={(event) => setEvening(event.target.value)}
+                    onChange={(event) => setEvening(event.target.value as Mood | '')}
                     required
                   />
                   🌃 Walking through a city at night
@@ -304,7 +315,7 @@ function App() {
                     name="evening"
                     value="chill"
                     checked={evening === 'chill'}
-                    onChange={(event) => setEvening(event.target.value)}
+                    onChange={(event) => setEvening(event.target.value as Mood | '')}
                   />
                   🛋️ Somewhere cozy and quiet
                 </label>
@@ -315,7 +326,7 @@ function App() {
                     name="evening"
                     value="party"
                     checked={evening === 'party'}
-                    onChange={(event) => setEvening(event.target.value)}
+                    onChange={(event) => setEvening(event.target.value as Mood | '')}
                   />
                   🎉 At a lively party
                 </label>
@@ -326,7 +337,7 @@ function App() {
                     name="evening"
                     value="dreamy"
                     checked={evening === 'dreamy'}
-                    onChange={(event) => setEvening(event.target.value)}
+                    onChange={(event) => setEvening(event.target.value as Mood | '')}
                   />
                   🌅 Somewhere watching the sunset
                 </label>
@@ -340,7 +351,7 @@ function App() {
 
               <select
                 value={sadSongs}
-                onChange={(event) => setSadSongs(event.target.value)}
+                onChange={(event) => setSadSongs(event.target.value as Mood | '')}
                 required
               >
                 <option value="" disabled>
@@ -365,7 +376,7 @@ function App() {
                     name="listening"
                     value="moody"
                     checked={listening === 'moody'}
-                    onChange={(event) => setListening(event.target.value)}
+                    onChange={(event) => setListening(event.target.value as Mood | '')}
                     required
                   />
                   🎧 Headphones on, world off
@@ -377,7 +388,7 @@ function App() {
                     name="listening"
                     value="feel-good"
                     checked={listening === 'feel-good'}
-                    onChange={(event) => setListening(event.target.value)}
+                    onChange={(event) => setListening(event.target.value as Mood | '')}
                   />
                   🚗 Singing loudly in the car
                 </label>
@@ -389,7 +400,7 @@ function App() {
                     name="listening"
                     value="party"
                     checked={listening === 'party'}
-                    onChange={(event) => setListening(event.target.value)}
+                    onChange={(event) => setListening(event.target.value as Mood | '')}
                   />
                   🕺 Dancing around my room
                 </label>
@@ -401,7 +412,7 @@ function App() {
                     name="listening"
                     value="chill"
                     checked={listening === 'chill'}
-                    onChange={(event) => setListening(event.target.value)}
+                    onChange={(event) => setListening(event.target.value as Mood | '')}
                   />
                   ☕ Music quietly playing in the background
                 </label>
@@ -415,7 +426,7 @@ function App() {
 
               <select
                 value={playlistTitle}
-                onChange={(event) => setPlaylistTitle(event.target.value)}
+                onChange={(event) => setPlaylistTitle(event.target.value as Mood | '')}
                 required
               >
                 <option value="" disabled>

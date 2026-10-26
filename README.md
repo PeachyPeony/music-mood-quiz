@@ -14,6 +14,7 @@ The quiz includes:
 - React
 - Vite
 - JavaScript
+- TypeScript
 - HTML
 - CSS
 
